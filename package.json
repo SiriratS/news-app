@@ -13,6 +13,7 @@
     "vue": "^2.6.14",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^9.1.2",
+    "vue-router": "^4.0.12",
     "vuetify": "^2.6.0"
   },
   "devDependencies": {
@@ -26,13 +27,16 @@
     "@vue/cli-plugin-typescript": "~5.0.0",
     "@vue/cli-plugin-unit-jest": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
+    "@vue/eslint-config-airbnb": "^6.0.0",
     "@vue/eslint-config-typescript": "^9.1.0",
     "@vue/test-utils": "^1.1.3",
     "@vue/vue2-jest": "^27.0.0-alpha.2",
     "babel-jest": "^27.0.6",
     "deepmerge": "^4.2.2",
     "eslint": "^7.32.0",
+    "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-vue": "^8.0.3",
+    "eslint-plugin-vuejs-accessibility": "^1.1.0",
     "jest": "^27.0.5",
     "sass": "~1.32",
     "sass-loader": "^12.6.0",
@@ -50,13 +54,25 @@
     "extends": [
       "plugin:vue/essential",
       "eslint:recommended",
-      "@vue/typescript"
+      "@vue/typescript",
+      "@vue/airbnb",
+      "@vue/typescript/recommended"
     ],
     "parserOptions": {
-      "parser": "@typescript-eslint/parser"
+      "parser": "@typescript-eslint/parser",
+      "ecmaVersion": 2020
     },
     "rules": {},
     "overrides": [
+      {
+        "files": [
+          "**/__tests__/*.{j,t}s?(x)",
+          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+        ],
+        "env": {
+          "jest": true
+        }
+      },
       {
         "files": [
           "**/__tests__/*.{j,t}s?(x)",
