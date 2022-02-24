@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
-import HomeView from '../views/HomeView.vue';
+import HomeView from '../views/HomeView/HomeView.vue';
+import NewsDetail from '../views/NewsDetailView/NewsDetailView.vue';
 
 Vue.use(VueRouter);
 
@@ -11,9 +12,9 @@ const routes: Array<RouteConfig> = [
     component: HomeView,
   },
   {
-    path: '/about',
-    name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+    path: '/news/:index',
+    name: 'news',
+    component: NewsDetail,
   },
 ];
 

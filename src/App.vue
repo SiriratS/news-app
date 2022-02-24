@@ -1,20 +1,22 @@
 <template>
   <v-app>
-    <v-app-bar app>
-      <v-toolbar-title>News</v-toolbar-title>
-    </v-app-bar>
+    <v-app-bar dense dark app>News</v-app-bar>
     <v-main>
-      <v-container>
-        <router-view/>
-      </v-container>
+      <router-view />
     </v-main>
+    <v-overlay :value="isLoading">
+      <v-progress-circular indeterminate size="64"></v-progress-circular>
+    </v-overlay>
   </v-app>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
-
-@Component({
-})
-export default class App extends Vue {}
+export default {
+  name: 'App',
+  data() {
+    return {
+      isLoading: false,
+    };
+  },
+};
 </script>
