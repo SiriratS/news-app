@@ -6,7 +6,7 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" md="6" sm="12" lg="4">
+      <v-col cols="12" md="6" sm="12" lg="3">
         <NewsItem />
       </v-col>
     </v-row>
