@@ -17,9 +17,9 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex';
 import SearchBar from './components/SearchBar/SearchBar.vue';
 import NewsItem from './components/NewsItem/NewsItem.vue';
-import $api from '../../api/api';
 
 export default {
   name: 'HomeView',
@@ -27,14 +27,12 @@ export default {
     SearchBar,
     NewsItem,
   },
-  data() {
-    return {
-      newsItems: [],
-    };
+  methods: {
+    ...mapActions(['find']),
   },
-  async mounted() {
-    this.newsItems = await $api.headline.find();
-    this.sources = await $api.source.get();
+  computed: mapState(['newsItems']),
+  created() {
+    this.find();
   },
 };
 </script>

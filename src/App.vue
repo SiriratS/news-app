@@ -11,12 +11,10 @@
 </template>
 
 <script lang="ts">
+import { mapState } from 'vuex';
+
 export default {
   name: 'App',
-  data() {
-    return {
-      isLoading: false,
-    };
-  },
+  computed: mapState(['isLoading']),
 };
 </script>

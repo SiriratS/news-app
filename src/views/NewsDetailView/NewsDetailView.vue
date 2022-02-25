@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid v-if="data">
+  <v-container fluid v-if="news">
     <v-row>
       <v-col cols="12">
         <v-subheader>
@@ -13,7 +13,7 @@
           <v-row>
             <v-col sm="6" xs="12">
               <v-img class="align-self-center align-md-self-center"
-                :src="data.urlToImage"
+                :src="news.urlToImage"
                 width="100%"
                 height="100%"
                 lazy-src="../../assets/default.jpeg"
@@ -22,17 +22,17 @@
             </v-col>
             <v-col sm="6" xs="12" class="d-flex flex-column justify-md-space-between">
               <div>
-                <v-card-title class="text-h5" v-text="data.title"></v-card-title>
+                <v-card-title class="text-h5" v-text="news.title"></v-card-title>
                 <v-card-subtitle class="d-flex justify-space-between flex-grow-0 flex-shrink-0">
-                  <span class="primary--text text-caption" v-html="data.author"></span>
+                  <span class="primary--text text-caption" v-html="news.author"></span>
                   <span class="text-caption flex-grow-0 flex-shrink-0 align-self-end ml-15">
-                    {{ formatDate(data.publishedAt) }}
+                    {{ formatDate(news.publishedAt) }}
                   </span>
                 </v-card-subtitle>
-                <v-card-text>{{data.content}}</v-card-text>
+                <v-card-text>{{news.content}}</v-card-text>
               </div>
               <v-card-actions class="d-flex justify-end">
-                <v-btn dark target="_blank" :href="data.url">See more →</v-btn>
+                <v-btn dark target="_blank" :href="news.url">See more →</v-btn>
               </v-card-actions>
             </v-col>
           </v-row>
@@ -42,8 +42,8 @@
   </v-container>
 </template>
 
-<script lang="ts">
-import $api from '../../api/api';
+<script>
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'NewsDetailView',
@@ -53,17 +53,20 @@ export default {
     };
   },
   methods: {
-    back() {
-      this.$router.go(-1);
-    },
-    formatDate(date: string) {
-      return new Date(date).toDateString();
+    ...mapActions(['findByIndex']),
+    ...{
+      back() {
+        this.$router.go(-1);
+      },
+      formatDate(date) {
+        return new Date(date).toDateString();
+      },
     },
   },
-  mounted() {
-    this.data = $api.headline.findByIndex(+this.$route.params.index);
-
-    if (!this.data) {
+  computed: mapState(['news']),
+  created() {
+    this.findByIndex(+this.$route.params.index);
+    if (!this.news) {
       this.$router.push('/');
     }
   },
