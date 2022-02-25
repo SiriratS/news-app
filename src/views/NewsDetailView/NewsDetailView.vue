@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container fluid v-if="data">
     <v-row>
       <v-col cols="12">
         <v-subheader>
@@ -10,55 +10,62 @@
     <v-row>
       <v-col cols="12">
         <v-card>
-          <div class="d-flex flex-column flex-md-row justify-md-space-between">
-            <v-img class="align-self-center align-md-self-center"
-              :src="data.urlToImage" max-width="500">
-            </v-img>
-            <div class="d-flex flex-column justify-md-space-between">
+          <v-row>
+            <v-col sm="6" xs="12">
+              <v-img class="align-self-center align-md-self-center"
+                :src="data.urlToImage"
+                width="100%"
+                height="100%"
+                lazy-src="../../assets/default.jpeg"
+              >
+              </v-img>
+            </v-col>
+            <v-col sm="6" xs="12" class="d-flex flex-column justify-md-space-between">
               <div>
                 <v-card-title class="text-h5" v-text="data.title"></v-card-title>
-                <v-card-subtitle class="d-flex justify-space-between">
-                  <span class="primary--text text-caption">{{ data.author }}</span>
-                  <span class="text-caption">{{ formatDate(data.publishedAt) }}</span>
+                <v-card-subtitle class="d-flex justify-space-between flex-grow-0 flex-shrink-0">
+                  <span class="primary--text text-caption" v-html="data.author"></span>
+                  <span class="text-caption flex-grow-0 flex-shrink-0 align-self-end ml-15">
+                    {{ formatDate(data.publishedAt) }}
+                  </span>
                 </v-card-subtitle>
                 <v-card-text>{{data.content}}</v-card-text>
               </div>
               <v-card-actions class="d-flex justify-end">
                 <v-btn dark target="_blank" :href="data.url">See more →</v-btn>
               </v-card-actions>
-            </div>
-          </div>
+            </v-col>
+          </v-row>
         </v-card>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
-<script>
+<script lang="ts">
+import $api from '../../api/api';
+
 export default {
   name: 'NewsDetailView',
   data() {
     return {
-      data: {
-        publishedAt: new Date().toISOString(),
-        title: 'xxxxxxxx',
-        author: 'aaaaa bbbbbb',
-        description: 'asdfmalfdmalksefnalksnflksef',
-        url: 'https://www.prnewswire.com/news-releases/truecar-releases-analysis-of-february-industry-sales-301490441.html',
-        content: `After a volatile 2021 in terms of pricing and supply, 
-          this month we're seeing signs of stability. From a supply standpoint, 
-          we're seeing industry new listings roughly in line with January. Additiona… [+19234 chars]`,
-        urlToImage: 'https://mma.prnewswire.com/media/1754090/TruearNewCarListingGraph.jpg?p=facebook',
-      },
+      data: undefined,
     };
   },
   methods: {
     back() {
       this.$router.go(-1);
     },
-    formatDate(date) {
+    formatDate(date: string) {
       return new Date(date).toDateString();
     },
+  },
+  mounted() {
+    this.data = $api.headline.findByIndex(+this.$route.params.index);
+
+    if (!this.data) {
+      this.$router.push('/');
+    }
   },
 };
 </script>

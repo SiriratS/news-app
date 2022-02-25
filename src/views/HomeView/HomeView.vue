@@ -6,8 +6,11 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col cols="12" md="6" sm="12" lg="3">
-        <NewsItem />
+      <v-col cols="12" sm="6" xs="12" lg="3" v-for="(item, index) in newsItems" :key="item.title">
+        <NewsItem
+          v-bind:data="item"
+          v-bind:index="index"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -16,6 +19,7 @@
 <script>
 import SearchBar from './components/SearchBar/SearchBar.vue';
 import NewsItem from './components/NewsItem/NewsItem.vue';
+import $api from '../../api/api';
 
 export default {
   name: 'HomeView',
@@ -27,6 +31,10 @@ export default {
     return {
       newsItems: [],
     };
+  },
+  async mounted() {
+    this.newsItems = await $api.headline.find();
+    this.sources = await $api.source.get();
   },
 };
 </script>
