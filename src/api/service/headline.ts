@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import { Headline, SearchHeadline } from '../../interface/headline';
+import { Headline, SearchHeadlineParams } from '../../interface/headline';
 
 export default class HeadlineAPI {
   data: Headline[] = [];
@@ -9,17 +9,34 @@ export default class HeadlineAPI {
     this.API_KEY = API_KEY;
   }
 
-  async find(search: SearchHeadline) {
+  async find(search: SearchHeadlineParams) {
+    let searchCriteria = {};
+    if (!HeadlineAPI.shouldSetDefaultSearchCriteria({ ...search })) {
+      searchCriteria = {
+
+        country: search.country?.label,
+        category: search.category?.label,
+        sources: search?.sources?.map((source) => source.value).toString(),
+      };
+    }
+
     const params = {
-      ...search,
       ...{
         apiKey: this.API_KEY,
         country: 'us',
+        q: search?.q,
       },
+      ...searchCriteria,
     };
 
     return this.$axios.get('top-headlines', {
       params,
     });
+  }
+
+  static shouldSetDefaultSearchCriteria(search: SearchHeadlineParams) {
+    return !search?.category
+    && !search?.country
+    && (!search?.sources || !search?.sources?.length);
   }
 }
