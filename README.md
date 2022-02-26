@@ -39,11 +39,11 @@ yarn run test:unit
 ```
 - unit test with generate code coverage report
 ```
-yarn run test:unit --codeCoverage 
+yarn run test:unit --coverage 
 ```
 - unit test with option watch and generate code coverage report
 ```
-yarn run test:unit --watchAll --runInBand --codeCoverage 
+yarn run test:unit --watchAll --runInBand --coverage 
 ```
 
 ### End to end test
