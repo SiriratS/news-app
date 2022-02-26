@@ -91,16 +91,20 @@
 <script>
 import { mapState, mapActions } from 'vuex';
 
+function formReset() {
+  return {
+    q: '',
+    sources: [],
+    country: '',
+    category: '',
+  };
+}
+
 export default {
   name: 'SearchBar',
   data() {
     return {
-      searchForm: {
-        q: '',
-        sources: [],
-        country: '',
-        category: '',
-      },
+      searchForm: formReset(),
     };
   },
   computed: {
@@ -115,20 +119,16 @@ export default {
   },
   methods: {
     ...mapActions(['findNews', 'toggleFilter', 'fetchSource']),
+
     ...{
       isExistingSearchParams() {
         const search = { ...this.search };
         return !!Object.keys(search).find((key) => !!search[key] && !!search[key]?.length);
       },
+
       submit(searchForm) {
         this.findNews(searchForm);
-
-        this.searchForm = {
-          q: '',
-          sources: [],
-          country: '',
-          category: '',
-        };
+        this.searchForm = formReset();
       },
     },
   },
