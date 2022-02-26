@@ -1,4 +1,5 @@
 import { BaseAPIRequest } from './api';
+import { DataList } from './data-list';
 
 export interface HeadlineSource {
     id: number;
@@ -16,8 +17,16 @@ export interface Headline {
     content: string;
 }
 
-export interface SearchHeadline extends BaseAPIRequest {
+export interface SearchHeadlineRequest extends BaseAPIRequest {
     country?: string,
-    sources?: string;
+    sources?: string[];
+    category?: string;
+    q?: string;
+}
+
+export interface SearchHeadlineParams extends BaseAPIRequest {
+    country?: DataList,
+    sources?: DataList[];
+    category?: DataList;
     q?: string;
 }
