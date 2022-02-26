@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import { Headline } from '../../interface/headline';
+import { Headline, SearchHeadline } from '../../interface/headline';
 
 export default class HeadlineAPI {
   data: Headline[] = [];
@@ -9,7 +9,17 @@ export default class HeadlineAPI {
     this.API_KEY = API_KEY;
   }
 
-  async find(search: any) {
-    return this.$axios.get(`top-headlines?country=us&apiKey=${this.API_KEY}`);
+  async find(search: SearchHeadline) {
+    const params = {
+      ...search,
+      ...{
+        apiKey: this.API_KEY,
+        country: 'us',
+      },
+    };
+
+    return this.$axios.get('top-headlines', {
+      params,
+    });
   }
 }

@@ -1,9 +1,9 @@
 import { GetterTree } from 'vuex';
-import State from './headline.state';
+import State from './state';
 
 const getters: GetterTree<State, State> = {
-  loading(state: State) {
-    return state.isLoading;
+  isOpenFilter(state: State) {
+    return state.isOpenFilter;
   },
 };
 
