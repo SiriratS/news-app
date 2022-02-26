@@ -37,8 +37,16 @@ yarn run lint
 ```
 yarn run test:unit
 ```
+- unit test with generate code coverage report
+```
+yarn run test:unit --codeCoverage 
+```
+- unit test with option watch and generate code coverage report
+```
+yarn run test:unit --watchAll --runInBand --codeCoverage 
+```
 
-### Unit test
+### End to end test
 ```
 yarn run test:e2e
 ```
