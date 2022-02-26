@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar dense dark app>News</v-app-bar>
+    <v-app-bar id="header" dense dark app>News</v-app-bar>
     <v-main>
       <router-view />
     </v-main>
