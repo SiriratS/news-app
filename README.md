@@ -51,6 +51,9 @@ yarn run test:unit --watchAll --runInBand --codeCoverage
 yarn run test:e2e
 ```
 
+## Commit message guide
+- angular conventional commits https://www.conventionalcommits.org/en/v1.0.0-beta.4/
+
 ## Dependencies
 - [vuetify](https://vuetifyjs.com/en/) - UI Framework
 - [vue-router](https://router.vuejs.org/) - Router
