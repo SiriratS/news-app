@@ -1,23 +1,45 @@
 import { ActionContext, ActionTree } from 'vuex';
 import $api from '@/api/api';
-import { SearchHeadline } from '@/interface/headline';
+import { SearchHeadlineParams } from '@/interface/headline';
 import State from './state';
 
 const actions: ActionTree<State, State> = {
-  async findNews({ commit }: ActionContext<State, State>, search?: SearchHeadline) {
-    commit('toggleFilter', false);
-    commit('loading', true);
-    const response = await $api.headline.find(search as SearchHeadline);
+  async findNews({ commit }: ActionContext<State, State>, search?: SearchHeadlineParams) {
+    try {
+      commit('loading', true);
+      const response = await $api.headline.find(search as SearchHeadlineParams);
 
-    commit('fetchHeadline', response.data.articles);
-    commit('loading', false);
+      commit('setToggleFilter', false);
+      commit('saveSearchCriteria', search);
+      commit('fetchHeadline', response.data.articles);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      commit('loading', false);
+    }
   },
+
   findNewsByIndex({ commit, state }: ActionContext<State, State>, index?: number) {
     const news = state.newsItems?.find((_item, i) => i === index);
     commit('getNewsByIndex', news);
   },
-  openFilter({ commit }) {
-    commit('toggleFilter', true);
+
+  toggleFilter({ commit }, isOpen: boolean) {
+    commit('setToggleFilter', !isOpen);
+  },
+
+  async fetchSource({ commit }: ActionContext<State, State>) {
+    try {
+      commit('loading', true);
+
+      const response = await $api.source.get();
+
+      commit('filterUniqueSource', response.data.sources);
+      commit('filterUniqueCountry', response.data.sources);
+      commit('filterUniqueCategory', response.data.sources);
+    } finally {
+      commit('loading', false);
+    }
   },
 };
 
