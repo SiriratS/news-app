@@ -2,11 +2,11 @@ import { DataList } from '@/interface/data-list';
 import { Headline, SearchHeadlineParams } from '@/interface/headline';
 
 export default class State {
-  newsItems!: Headline[];
+  newsItems: Headline[] = [];
 
   news!: Headline;
 
-  isLoading!: boolean;
+  isLoading = false;
 
   isOpenFilter!: boolean;
 
@@ -24,4 +24,6 @@ export default class State {
   sources!: DataList[];
 
   categories!: DataList[];
+
+  errorMessage!: string;
 }

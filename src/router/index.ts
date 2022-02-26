@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
-import HomeView from '../views/HomeView/HomeView.vue';
-import NewsDetail from '../views/NewsDetailView/NewsDetailView.vue';
+import ErrorView from '@/views/ErrorView/ErrorView.vue';
+import HomeView from '@/views/HomeView/HomeView.vue';
+import NewsDetail from '@/views/NewsDetailView/NewsDetailView.vue';
 
 Vue.use(VueRouter);
 
@@ -15,6 +16,11 @@ const routes: Array<RouteConfig> = [
     path: '/news/:index',
     name: 'news',
     component: NewsDetail,
+  },
+  {
+    path: '*',
+    name: 'error',
+    component: ErrorView,
   },
 ];
 

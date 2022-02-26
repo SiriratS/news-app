@@ -13,7 +13,7 @@ const actions: ActionTree<State, State> = {
       commit('saveSearchCriteria', search);
       commit('fetchHeadline', response.data.articles);
     } catch (error) {
-      console.error(error);
+      commit('setError', error);
     } finally {
       commit('loading', false);
     }
