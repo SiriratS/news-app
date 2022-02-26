@@ -53,7 +53,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['findByIndex']),
+    ...mapActions(['findNewsByIndex']),
     ...{
       back() {
         this.$router.go(-1);
@@ -65,7 +65,7 @@ export default {
   },
   computed: mapState(['news']),
   created() {
-    this.findByIndex(+this.$route.params.index);
+    this.findNewsByIndex(+this.$route.params.index);
     if (!this.news) {
       this.$router.push('/');
     }

@@ -28,11 +28,11 @@ export default {
     NewsItem,
   },
   methods: {
-    ...mapActions(['find']),
+    ...mapActions(['findNews']),
   },
   computed: mapState(['newsItems']),
   created() {
-    this.find();
+    this.findNews();
   },
 };
 </script>
