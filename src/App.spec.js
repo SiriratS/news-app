@@ -1,5 +1,5 @@
 import { shallowMount, createLocalVue } from '@vue/test-utils';
-import Vuex, { Store } from 'vuex';
+import Vuex from 'vuex';
 import App from './App.vue';
 import '@/test/setup';
 
@@ -7,24 +7,25 @@ const localVue = createLocalVue();
 localVue.use(Vuex);
 
 describe('App.vue', () => {
-  let state = {
-    isLoading: true
+  const state = {
+    isLoading: true,
   };
-  let store: Store<{ isLoading: boolean; }>;
+  let store;
+  let wrapper;
 
   beforeEach(() => {
     store = new Vuex.Store({
-        state,
+      state,
+    });
+
+    wrapper = shallowMount(App, {
+      localVue,
+      store,
+      stubs: ['router-view'],
     });
   });
 
   it('it should be renders', () => {
-    const wrapper = shallowMount(App, { 
-      localVue, 
-      store,
-      stubs: ['router-view']
-    });
-
-    expect(wrapper).toBeDefined(); 
+    expect(wrapper).toBeDefined();
   });
 });
