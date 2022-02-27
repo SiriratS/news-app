@@ -1,13 +1,21 @@
 <template>
   <div>
     <v-card outlined class="d-flex justify-space-between px-5 py-3">
-      <div>
-        <v-btn outlined @click="findNews()"> Headline </v-btn>
+      <div data-testid="home-sub-header">
+        <v-btn
+          outlined
+          data-testid="home-button"
+          @click="findNews()"
+        > Headline </v-btn>
         <span v-if="isExistingSearchParams()">
           / <v-btn outlined @click="findNews(search)"> {{ searchCriteria }} </v-btn>
         </span>
       </div>
-      <v-btn dark @click="toggleFilter(isOpenFilter)"> FITTER </v-btn>
+      <v-btn
+        dark
+        @click="toggleFilter(isOpenFilter)"
+        data-testid="filter-button"
+      > FITTER </v-btn>
     </v-card>
     <v-navigation-drawer
       :value.sync="isOpenFilter"
@@ -23,6 +31,7 @@
             <v-btn
               icon
               color="black"
+              data-testid="close-filter-button"
               @click="toggleFilter(isOpenFilter)"
             >
               <v-icon>mdi-close</v-icon>
@@ -37,6 +46,7 @@
             <v-text-field
               v-model="searchForm.q"
               counter
+              data-testid="keyword"
               maxlength="50"
               label="Keyword"
             ></v-text-field>
@@ -53,6 +63,7 @@
             multiple
             small-chips
             clearable
+            data-testid="sources"
             return-object
           ></v-autocomplete>
         </v-list-item>
@@ -65,6 +76,7 @@
             item-text="label"
             item-value="value"
             clearable
+            data-testid="country"
             return-object
           ></v-autocomplete>
         </v-list-item>
@@ -77,11 +89,16 @@
             item-text="label"
             item-value="value"
             clearable
+            data-testid="category"
             return-object
           ></v-autocomplete>
         </v-list-item>
         <v-list-item class="d-flex justify-end">
-          <v-btn dark @click="submit(searchForm)"> FITTER </v-btn>
+          <v-btn dark
+            data-testid="submit-filter-button"
+            @click="submit(searchForm)">
+            FITTER
+          </v-btn>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -122,8 +139,10 @@ export default {
 
     ...{
       isExistingSearchParams() {
-        const search = { ...this.search };
-        return !!Object.keys(search).find((key) => !!search[key] && !!search[key]?.length);
+        return !!this.search?.q
+          || !!this.search?.sources?.length
+          || this.search?.country?.value
+          || this.search?.category?.value;
       },
 
       submit(searchForm) {
