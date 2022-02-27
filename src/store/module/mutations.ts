@@ -4,6 +4,28 @@ import { AxiosError } from 'axios';
 import { MutationTree } from 'vuex';
 import State from './state';
 
+function getSearchCriteriaMessage(search: SearchHeadlineParams) {
+  const items = [];
+
+  if (search.q) {
+    items.push(`Keyword "${search.q}"`);
+  }
+
+  if (search.category) {
+    items.push(` Category "${search.category.label}"`);
+  }
+
+  if (search.country) {
+    items.push(` Country "${search.country.label}"`);
+  }
+
+  if (search.sources?.length) {
+    items.push(` Sources "${search?.sources?.map((source) => source.label).toString()}"`);
+  }
+
+  return `Search by ${items.join('and')}`;
+}
+
 const mutations: MutationTree<State> = {
   fetchHeadline(state: State, newsItems: Headline[]) {
     if (!newsItems.length) {
@@ -64,25 +86,9 @@ const mutations: MutationTree<State> = {
 
   saveSearchCriteria(state: State, search: SearchHeadlineParams) {
     if (search) {
-      const searchCriteria = [];
-      if (search.q) {
-        searchCriteria.push(`Keyword "${search.q}"`);
-      }
-
-      if (search.category) {
-        searchCriteria.push(` Category "${search.category.label}"`);
-      }
-
-      if (search.country) {
-        searchCriteria.push(` Country "${search.country.label}"`);
-      }
-
-      if (search.sources?.length) {
-        searchCriteria.push(` Sources "${search?.sources?.map((source) => source.label).toString()}"`);
-      }
-
-      state.searchCriteria = `Search by ${searchCriteria.join('and')}`;
+      state.searchCriteria = getSearchCriteriaMessage(search);
     }
+
     state.search = search;
   },
 
