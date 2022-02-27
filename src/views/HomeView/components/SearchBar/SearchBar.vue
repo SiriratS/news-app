@@ -19,7 +19,7 @@
     </v-card>
     <v-navigation-drawer
       :value.sync="isOpenFilter"
-      absolute
+      fixed
       right
       temporary
       @transitionend="toggleFilter(isOpenFilter)"

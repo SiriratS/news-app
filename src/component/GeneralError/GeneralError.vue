@@ -12,7 +12,7 @@
       </v-col>
       <v-col sm="6" xs="12" class="d-flex flex-column justify-center">
         <v-card-title class="text-h1">Sorry</v-card-title>
-        <v-card-text class="text-h5">{{ message }}</v-card-text>
+        <v-card-text data-testid="error-message" class="text-h5">{{ message }}</v-card-text>
       </v-col>
     </v-row>
   </v-card>
