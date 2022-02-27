@@ -1,9 +1,7 @@
 import { AxiosInstance } from 'axios';
-import { Headline, SearchHeadlineParams } from '../../interface/headline';
+import { SearchHeadlineParams } from '../../interface/headline';
 
 export default class HeadlineAPI {
-  data: Headline[] = [];
-
   constructor(private $axios: AxiosInstance, private API_KEY: string) {
     this.$axios = $axios;
     this.API_KEY = API_KEY;
@@ -14,8 +12,8 @@ export default class HeadlineAPI {
     if (!HeadlineAPI.shouldSetDefaultSearchCriteria({ ...search })) {
       searchCriteria = {
 
-        country: search.country?.label,
-        category: search.category?.label,
+        country: search.country?.value,
+        category: search.category?.value,
         sources: search?.sources?.map((source) => source.value).toString(),
       };
     }
