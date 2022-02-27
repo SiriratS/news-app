@@ -57,6 +57,17 @@ describe('Home page', () => {
     cy.get('[data-testid="home-sub-header"]').contains('United States');
   });
 
+  it('Should display error from API response when search not found', () => {
+    cy.wait(2000);
+
+    cy.get('[data-testid="filter-button"]').click();
+
+    cy.get('[data-testid="keyword"]').type('sdfasefasfeasefasef');
+    cy.get('[data-testid="submit-filter-button"]').click();
+
+    cy.get('[data-testid="error-message"]').should('exist');
+  });
+
   it('Should able to clear search', () => {
     cy.wait(1000);
     cy.get('[data-testid="home-button"]').click();
