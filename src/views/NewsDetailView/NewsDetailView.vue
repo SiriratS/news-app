@@ -47,11 +47,6 @@ import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'NewsDetailView',
-  data() {
-    return {
-      data: undefined,
-    };
-  },
   methods: {
     ...mapActions(['findNewsByIndex']),
     ...{
