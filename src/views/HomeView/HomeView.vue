@@ -10,7 +10,7 @@
         <NewsItem v-bind:data="item" v-bind:index="index" />
       </v-col>
     </v-row>
-    <v-row v-if="!newsItems.length">
+    <v-row v-if="!newsItems.length && !isLoading">
       <v-col cols=12>
         <GeneralError
           :message="errorMessage"
@@ -36,7 +36,7 @@ export default {
   methods: {
     ...mapActions(['findNews']),
   },
-  computed: mapState(['newsItems', 'errorMessage']),
+  computed: mapState(['newsItems', 'errorMessage', 'isLoading']),
   created() {
     this.findNews();
   },
