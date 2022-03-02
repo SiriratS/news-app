@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto d-flex flex-column news-item" height="100%">
+  <v-card data-test="news-item" class="mx-auto d-flex flex-column news-item" height="100%">
     <v-img
       :src="data.urlToImage"
       lazy-src="../../../../assets/default.jpeg"

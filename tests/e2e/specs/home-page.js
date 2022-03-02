@@ -72,4 +72,9 @@ describe('Home page', () => {
     cy.wait(1000);
     cy.get('[data-testid="home-button"]').click();
   });
+
+  it('Should be show error message', () => {
+    cy.get('[data-testid="error-button"]').click();
+    cy.get('[data-testid="error-message"]').should('exist');
+  });
 });
