@@ -1,7 +1,11 @@
 <template>
   <v-dialog v-model="dialog" persistent max-width="290">
     <template v-slot:activator="{ on, attrs }">
-      <v-btn v-bind="attrs" v-on="on" class="mb-5">Edit title</v-btn>
+      <v-btn data-testid="edit-title-button"
+        v-bind="attrs"
+        v-on="on"
+        class="mb-5"
+      >Edit title</v-btn>
     </template>
     <v-card>
       <v-card-title>
@@ -18,7 +22,11 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn text color="teal" @click="submit()"> Submit </v-btn>
+        <v-btn text
+          data-testid="edit-title-submit-button"
+          color="teal"
+          @click="submit()"
+        > Submit </v-btn>
         <v-btn text color="gray" @click="cancel()"> Cancel </v-btn>
       </v-card-actions>
     </v-card>

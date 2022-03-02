@@ -23,7 +23,7 @@
   </v-dialog>
 </template>
 
-<script lang="ts">
+<script>
 import { mapState } from 'vuex';
 
 export default {
@@ -34,7 +34,7 @@ export default {
     };
   },
   methods: {
-    toggleDialog(dialog: boolean) {
+    toggleDialog(dialog) {
       this.dialog = !dialog;
     },
   },
