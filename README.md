@@ -1,7 +1,8 @@
 # News application created by vue version 2 generate by [vue-cli](https://cli.vuejs.org/)
 
 ## Overview
-![overview](https://user-images.githubusercontent.com/29428218/155890649-48c95b28-a93a-40a0-89f0-89159e43ff76.gif)
+
+![overview](https://user-images.githubusercontent.com/29428218/156417804-bda6c643-694e-4d4b-93d9-f7671ee2b41a.gif)
 
 ## Feature
 - Display news headline from multiple news sources, country
