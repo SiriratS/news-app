@@ -17,7 +17,7 @@
       </v-card-text>
       <v-divider></v-divider>
       <v-card-actions>
-        <v-btn text @click="dialog = false"> Close </v-btn>
+        <v-btn text @click="toggleDialog(dialog)"> Close </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -32,6 +32,11 @@ export default {
     return {
       dialog: false,
     };
+  },
+  methods: {
+    toggleDialog(dialog: boolean) {
+      this.dialog = !dialog;
+    },
   },
   computed: mapState(['visitedNews']),
 };

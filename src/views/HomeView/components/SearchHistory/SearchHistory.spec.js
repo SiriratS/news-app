@@ -11,7 +11,6 @@ localVue.use(Vuex);
 
 describe('SearchHistory.vue', () => {
   const state = {
-    isOpenFilter: false,
     search: {
       q: undefined,
       sources: [],
@@ -19,34 +18,17 @@ describe('SearchHistory.vue', () => {
       category: undefined,
     },
     searchCriteria: null,
-    countries: [
-      { label: 'xxxx', value: 'ru' },
-      { label: 'bbbbb', value: 'dd' },
-    ],
-    sources: [
-      { label: 'ABC', value: 'abc' },
-      { label: 'CCBB', value: 'cc-bb' },
-    ],
-    categories: [
-      { label: 'Business', value: 'business' },
-      { label: 'Sport', value: 'sport' },
-    ],
   };
   let store;
-
-  const actions = {
-    findNews: jest.fn(),
-  };
 
   let wrapper;
 
   beforeEach(() => {
     store = new Vuex.Store({
       state,
-      actions,
     });
 
-    wrapper = shallowMount(SearchBar, {
+    wrapper = shallowMount(SearchHistory, {
       localVue,
       store,
       vuetify,
@@ -78,18 +60,6 @@ describe('SearchHistory.vue', () => {
       };
 
       expect(wrapper.vm.isExistingSearchParams()).toBeTruthy();
-    });
-  });
-
-  it('it should call findNews and reset search form when trigger submit', () => {
-    wrapper.vm.submit();
-
-    expect(actions.findNews).toHaveBeenCalled();
-    expect(wrapper.vm.searchForm).toEqual({
-      q: '',
-      sources: [],
-      country: '',
-      category: '',
     });
   });
 });
