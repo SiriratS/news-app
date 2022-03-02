@@ -31,7 +31,7 @@ describe('mutations', () => {
 
       mutations.fetchHeadline(state, mock);
 
-      expect(state.errorMessage).toBeNull();
+      expect(state.errorMessage).toEqual('');
       expect(state.newsItems).toEqual(mock);
     });
   });

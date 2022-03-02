@@ -41,6 +41,23 @@ describe('actions', () => {
     });
   });
 
+  describe('callInvalidUrl', () => {
+    it('should it commit correct event when get error response from API', async () => {
+      const commit = jest.fn();
+      const mock = 'error na ja';
+
+      $api.invalid.get.mockReturnValue(Promise.reject(mock));
+
+      await actions.callInvalidUrl({ commit }, null);
+
+      expect(commit).toHaveBeenCalledWith('loading', true);
+
+      expect(commit).toHaveBeenCalledWith('setError', mock);
+
+      expect(commit).toHaveBeenCalledWith('loading', false);
+    });
+  });
+
   describe('findNewsByIndex', () => {
     it('should commit getNewsByIndex event with correct item', () => {
       const commit = jest.fn();

@@ -34,6 +34,7 @@ const mutations: MutationTree<State> = {
         please try again with new search criteria`;
     }
 
+    state.errorMessage = '';
     state.newsItems = newsItems;
   },
 

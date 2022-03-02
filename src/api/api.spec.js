@@ -5,5 +5,6 @@ describe('$api', () => {
   it('it should be existing', () => {
     expect($api.headline).toBeDefined();
     expect($api.source).toBeDefined();
+    expect($api.invalid).toBeDefined();
   });
 });
