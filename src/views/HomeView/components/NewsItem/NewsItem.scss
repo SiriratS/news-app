@@ -1,1 +1,14 @@
 @import '../../../../variable.scss';
+
+.news-item {
+    &-overlay {
+        display: none;
+    }
+
+    &:hover {
+        .news-item-overlay {
+            display: flex;
+            transition-duration: 0.5s;
+        }
+    }
+}

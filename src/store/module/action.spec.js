@@ -91,6 +91,17 @@ describe('actions', () => {
     });
   });
 
+  describe('submitNewsTitle', () => {
+    it('should commit updateNewsTitle event with correct value', () => {
+      const commit = jest.fn();
+      const mock = { title: 'xxxx', index: 2 };
+
+      actions.submitNewsTitle({ commit }, mock);
+
+      expect(commit).toHaveBeenCalledWith('updateNewsTitle', mock);
+    });
+  });
+
   describe('fetchSource', () => {
     it('should it commit correct event when get success response from API', async () => {
       const commit = jest.fn();

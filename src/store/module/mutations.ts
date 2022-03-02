@@ -41,6 +41,10 @@ const mutations: MutationTree<State> = {
     state.news = news;
   },
 
+  updateNewsTitle(state: State, { title, index }) {
+    state.newsItems[index].title = title;
+  },
+
   filterUniqueSource(state: State, sources: Source[]) {
     const sourcesDataList = sources.map((source) => ({
       label: source.name,
