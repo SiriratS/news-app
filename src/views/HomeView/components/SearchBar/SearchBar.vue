@@ -1,7 +1,6 @@
 <template>
   <div>
     <v-card outlined class="d-flex justify-space-between px-5 py-3">
-      <div data-testid="home-sub-header">
         <v-btn outlined
           color="red"
           class="mr-5"
@@ -11,7 +10,6 @@
           Show API error
         </v-btn>
         <VisitedNewsDialog />
-      </div>
       <v-btn dark @click="toggleFilter(isOpenFilter)" data-testid="filter-button"> FITTER </v-btn>
     </v-card>
     <v-navigation-drawer

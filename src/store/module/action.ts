@@ -1,7 +1,6 @@
 import { ActionContext, ActionTree } from 'vuex';
 import $api from '@/api/api';
 import { SearchHeadlineParams } from '@/interface/headline';
-import { Route } from 'vue-router';
 import State from './state';
 
 const actions: ActionTree<State, State> = {

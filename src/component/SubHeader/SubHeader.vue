@@ -5,7 +5,7 @@
   </v-subheader>
 </template>
 
-<script lang="ts">
+<script>
 import VisitedNewsDialog from '@/component/VisitedNewsDialog/VisitedNewsDialog.vue';
 
 export default {
