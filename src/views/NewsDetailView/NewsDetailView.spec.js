@@ -29,7 +29,6 @@ describe('NewsDetailView.vue', () => {
       store,
       mocks: {
         $router: {
-          go: jest.fn(),
           push: jest.fn(),
         },
         $route: {
@@ -45,12 +44,6 @@ describe('NewsDetailView.vue', () => {
     expect(wrapper).toBeDefined();
 
     expect(actions.findNewsByIndex).toHaveBeenCalled();
-  });
-
-  it('should call router', () => {
-    wrapper.vm.back();
-
-    expect(wrapper.vm.$router.go).toHaveBeenCalled();
   });
 
   it('should return date string format', () => {

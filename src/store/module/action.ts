@@ -1,6 +1,7 @@
 import { ActionContext, ActionTree } from 'vuex';
 import $api from '@/api/api';
 import { SearchHeadlineParams } from '@/interface/headline';
+import { Route } from 'vue-router';
 import State from './state';
 
 const actions: ActionTree<State, State> = {
@@ -39,7 +40,7 @@ const actions: ActionTree<State, State> = {
     commit('setToggleFilter', !isOpen);
   },
 
-  submitNewsTitle({ commit }: ActionContext<State, State>, { title, index }): void {
+  submitNewsTitle({ commit }: ActionContext<State, State>, { title, index }) {
     commit('updateNewsTitle', { title, index });
   },
 

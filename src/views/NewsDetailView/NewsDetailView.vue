@@ -2,9 +2,7 @@
   <v-container fluid v-if="news">
     <v-row>
       <v-col cols="12">
-        <v-subheader>
-          <v-btn dark @click="back()">← Go Back</v-btn>
-        </v-subheader>
+        <SubHeader />
       </v-col>
     </v-row>
     <v-row>
@@ -44,15 +42,16 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import SubHeader from '@/component/SubHeader/SubHeader.vue';
 
 export default {
   name: 'NewsDetailView',
+  components: {
+    SubHeader,
+  },
   methods: {
     ...mapActions(['findNewsByIndex']),
     ...{
-      back() {
-        this.$router.go(-1);
-      },
       formatDate(date) {
         return new Date(date).toDateString();
       },

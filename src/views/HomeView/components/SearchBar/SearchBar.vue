@@ -2,18 +2,15 @@
   <div>
     <v-card outlined class="d-flex justify-space-between px-5 py-3">
       <div data-testid="home-sub-header">
-        <v-btn outlined data-testid="home-button" @click="findNews()"> Headline </v-btn>
-        <span v-if="isExistingSearchParams()">
-          / <v-btn outlined @click="findNews(search)"> {{ searchCriteria }} </v-btn>
-        </span>
         <v-btn outlined
           color="red"
-          class="ml-5"
+          class="mr-5"
           data-testid="error-button"
           @click="callInvalidUrl()"
         >
           Show API error
         </v-btn>
+        <VisitedNewsDialog />
       </div>
       <v-btn dark @click="toggleFilter(isOpenFilter)" data-testid="filter-button"> FITTER </v-btn>
     </v-card>
@@ -105,6 +102,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex';
+import VisitedNewsDialog from '@/component/VisitedNewsDialog/VisitedNewsDialog.vue';
 
 function formReset() {
   return {
@@ -117,6 +115,9 @@ function formReset() {
 
 export default {
   name: 'SearchBar',
+  components: {
+    VisitedNewsDialog,
+  },
   data() {
     return {
       searchForm: formReset(),
@@ -125,8 +126,6 @@ export default {
   computed: {
     ...mapState({
       isOpenFilter: (state) => state.isOpenFilter,
-      search: (state) => state.search,
-      searchCriteria: (state) => state.searchCriteria,
       countries: (state) => state.countries,
       sources: (state) => state.sources,
       categories: (state) => state.categories,
@@ -136,15 +135,6 @@ export default {
     ...mapActions(['findNews', 'toggleFilter', 'fetchSource', 'callInvalidUrl']),
 
     ...{
-      isExistingSearchParams() {
-        return (
-          !!this.search?.q
-          || !!this.search?.sources?.length
-          || this.search?.country?.value
-          || this.search?.category?.value
-        );
-      },
-
       submit(searchForm) {
         this.findNews(searchForm);
         this.searchForm = formReset();

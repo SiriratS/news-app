@@ -326,4 +326,44 @@ describe('mutations', () => {
       expect(state.errorMessage).toEqual(mock.response.data.message);
     });
   });
+
+  describe('pushVisitedNews', () => {
+    it('should do nothing when newsItems is empty', () => {
+      const mock = {
+        params: {
+          index: 0,
+        },
+      };
+      const state = {
+        visitedNews: [],
+        newsItems: [],
+      };
+
+      mutations.pushVisitedNews(state, mock);
+
+      expect(state.visitedNews).toEqual([]);
+    });
+    it('should do set visitedNews when newsItems is not empty', () => {
+      const mock = {
+        params: {
+          index: '0',
+        },
+      };
+      const state = {
+        visitedNews: [],
+        newsItems: [{
+          title: 'xxxxx',
+          author: 'sssssss',
+          urlToImage: 'http://xxxx.com',
+          url: 'http://yyyyy.com',
+          publishedAt: '2022-02-27T05:37:30Z',
+        }],
+      };
+
+      mutations.pushVisitedNews(state, mock);
+
+      expect(state.visitedNews[mock.params.index])
+        .toEqual(state.newsItems[mock.params.index].title);
+    });
+  });
 });
