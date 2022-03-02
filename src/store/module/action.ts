@@ -28,6 +28,10 @@ const actions: ActionTree<State, State> = {
     commit('setToggleFilter', !isOpen);
   },
 
+  submitNewsTitle({ commit }: ActionContext<State, State>, { title, index }): void {
+    commit('updateNewsTitle', { title, index });
+  },
+
   async fetchSource({ commit }: ActionContext<State, State>) {
     try {
       commit('loading', true);

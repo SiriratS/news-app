@@ -55,6 +55,25 @@ describe('mutations', () => {
     });
   });
 
+  describe('updateNewsTitle', () => {
+    it('should set correct state', () => {
+      const mock = { title: 'updated', index: 0 };
+      const state = {
+        newsItems: [{
+          title: 'xxxxx',
+          author: 'sssssss',
+          urlToImage: 'http://xxxx.com',
+          url: 'http://yyyyy.com',
+          publishedAt: '2022-02-27T05:37:30Z',
+        }],
+      };
+
+      mutations.updateNewsTitle(state, mock);
+
+      expect(state.newsItems[mock.index].title).toEqual(mock.title);
+    });
+  });
+
   describe('filterUniqueSource', () => {
     it('should set correct state and filter duplicate value', () => {
       const mock = [
