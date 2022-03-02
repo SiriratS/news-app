@@ -2,9 +2,7 @@
   <v-container fluid>
     <v-row>
       <v-col cols="12">
-        <v-subheader>
-          <v-btn data-testid="back-button" dark @click="back()">← Go Back</v-btn>
-        </v-subheader>
+        <SubHeader />
       </v-col>
     </v-row>
     <v-row>
@@ -19,18 +17,13 @@
 
 <script>
 import GeneralError from '@/component/GeneralError/GeneralError.vue';
+import SubHeader from '@/component/SubHeader/SubHeader.vue';
 
 export default {
   name: 'ErrorView',
   components: {
     GeneralError,
-  },
-  methods: {
-    ...{
-      back() {
-        this.$router.go(-1);
-      },
-    },
+    SubHeader,
   },
 };
 </script>

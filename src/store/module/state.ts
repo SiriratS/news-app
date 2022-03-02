@@ -26,4 +26,6 @@ export default class State {
   categories!: DataList[];
 
   errorMessage!: string;
+
+  visitedNews: string[] = [];
 }

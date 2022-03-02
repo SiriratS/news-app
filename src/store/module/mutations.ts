@@ -1,6 +1,7 @@
 import { Headline, SearchHeadlineParams } from '@/interface/headline';
 import { Source } from '@/interface/source';
 import { AxiosError } from 'axios';
+import { Route } from 'vue-router';
 import { MutationTree } from 'vuex';
 import State from './state';
 
@@ -99,6 +100,15 @@ const mutations: MutationTree<State> = {
 
   setError(state: State, error: AxiosError) {
     state.errorMessage = error.response?.data.message;
+  },
+
+  pushVisitedNews(state: State, hook: Route) {
+    if (!state.newsItems.length) {
+      return;
+    }
+
+    const index = +hook.params.index;
+    state.visitedNews.push(state.newsItems[index].title);
   },
 };
 

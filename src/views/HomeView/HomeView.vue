@@ -3,6 +3,7 @@
     <v-row>
       <v-col cols="12">
         <SearchBar />
+        <SearchHistory />
       </v-col>
     </v-row>
     <v-row v-if="newsItems.length && !errorMessage">
@@ -25,6 +26,7 @@ import { mapState, mapActions } from 'vuex';
 import GeneralError from '@/component/GeneralError/GeneralError.vue';
 import SearchBar from './components/SearchBar/SearchBar.vue';
 import NewsItem from './components/NewsItem/NewsItem.vue';
+import SearchHistory from './components/SearchHistory/SearchHistory.vue';
 
 export default {
   name: 'HomeView',
@@ -32,6 +34,7 @@ export default {
     SearchBar,
     NewsItem,
     GeneralError,
+    SearchHistory,
   },
   methods: {
     ...mapActions(['findNews']),
