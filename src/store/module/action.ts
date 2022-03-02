@@ -19,6 +19,17 @@ const actions: ActionTree<State, State> = {
     }
   },
 
+  async callInvalidUrl({ commit }: ActionContext<State, State>) {
+    try {
+      commit('loading', true);
+      await $api.invalid.get();
+    } catch (error) {
+      commit('setError', error);
+    } finally {
+      commit('loading', false);
+    }
+  },
+
   findNewsByIndex({ commit, state }: ActionContext<State, State>, index?: number) {
     const news = state.newsItems?.find((_item, i) => i === index);
     commit('getNewsByIndex', news);

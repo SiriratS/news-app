@@ -5,12 +5,12 @@
         <SearchBar />
       </v-col>
     </v-row>
-    <v-row v-if="newsItems.length">
+    <v-row v-if="newsItems.length && !errorMessage">
       <v-col cols="12" sm="6" xs="12" lg="3" v-for="(item, index) in newsItems" :key="item.title">
         <NewsItem v-bind:data="item" v-bind:index="index" />
       </v-col>
     </v-row>
-    <v-row v-if="!newsItems.length && !isLoading">
+    <v-row v-if="(!newsItems.length || errorMessage)  && !isLoading">
       <v-col cols=12>
         <GeneralError
           :message="errorMessage"
